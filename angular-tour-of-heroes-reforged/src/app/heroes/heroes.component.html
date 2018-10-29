@@ -1,0 +1,28 @@
+<h2>My Heroes</h2>
+<div class="heroes grid grid-pad">
+  <a class="col-1-4" *ngFor="let hero of heroes" routerLink="/detail/{{hero.id}}">
+    <span class="badge">{{hero.id}}</span>
+    <button class="delete" title="delete hero" (click)="delete(hero)">x</button>
+    <div class="grid grid-pad">
+        <div class="col-1-4">
+          <img class="img-size-small" src="{{hero.image}}"/>
+        </div>
+        <div class="col-1-8">
+          <h4>{{hero.name}}</h4>
+          <div><span>Attack:</span>{{hero.attackPower}}</div>
+          <div><span>Defense: </span>{{hero.defensePower}}</div>
+          <div><span>XP:</span>{{hero.levelGauge}}</div>
+        </div>
+    </div>
+  </a>
+</div>
+<!--<h2>Add new Hero</h2>
+ <div class="grid grid-pad">
+  <label>Hero name:
+    <input #heroName />
+  </label>-->
+  <!-- (click) passes input value to add() and then clears the input -->
+  <!-- <button (click)="add(heroName.value); heroName.value=''">
+    add
+  </button>
+</div>  -->

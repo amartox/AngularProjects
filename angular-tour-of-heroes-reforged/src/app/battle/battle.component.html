@@ -1,0 +1,54 @@
+<div class="grid grid-pad">
+  <div *ngIf="hero" class="col-1-8">
+    <h2>{{hero.name | uppercase}}</h2>
+    <div><span>Health: </span>{{hero.healthPower}}</div>
+    <div><span>Level: </span>{{hero.level}}</div>
+    <div><span>Special Attack: </span>{{hero.specialAttackGauge}}</div>
+    <div [@myanimationHero] = "stateHero"><img class="img-size-large" src="{{hero.image}}"/></div>
+    <div class="grid grid-pad">
+      <div><span>Attack:</span>{{hero.attackPower}}</div>
+      <div><span>Defense: </span>{{hero.defensePower}}</div>
+      <div><span>XP:</span>{{hero.levelGauge}}</div>
+    </div>
+    <button *ngIf="hero.healthPower > 0 && (enemies[0].healthPower > 0 || enemies[1].healthPower > 0)" (click)="attack()">Attack</button>
+    <button *ngIf="hero.healthPower > 0 && (enemies[0].healthPower > 0 || enemies[1].healthPower > 0)" [disabled]="(hero.specialAttackGauge < 20)" (click)="attack(true)">Special Attack</button>
+  </div>
+  <div *ngIf="enemies" class="col-1-8">
+    <div class="grid grid-pad">
+      <div class="col-1-8 {{enemies[0].class}}">
+        <div class="enemy" (click)="selectEnemy($event,enemies[0])">
+          <h2>{{enemies[0].name | uppercase}}</h2>
+          <div><span>Health: </span>{{enemies[0].healthPower}}</div>
+          <div><span>Level: </span>{{enemies[0].level}}</div>
+          <div><span>Special Attack: </span>{{enemies[0].specialAttackGauge}}</div>
+          <div [@myanimationEnemy1] = "stateEnemy1"><img class="img-size-large" src="{{enemies[0].image}}"/></div>
+          <div class="grid grid-pad">
+            <div><span>Attack:</span>{{enemies[0].attackPower}}</div>
+            <div><span>Defense: </span>{{enemies[0].defensePower}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-1-8 {{enemies[1].class}}">
+          <div class="enemy" (click)="selectEnemy($event,enemies[1])">
+            <h2>{{enemies[1].name | uppercase}}</h2>
+            <div><span>Health: </span>{{enemies[1].healthPower}}</div>
+            <div><span>Level: </span>{{enemies[1].level}}</div>
+            <div><span>Special Attack: </span>{{enemies[1].specialAttackGauge}}</div>
+            <div [@myanimationEnemy2] = "stateEnemy2"><img class="img-size-large" src="{{enemies[1].image}}"/></div>
+            <div class="grid grid-pad">
+              <div><span>Attack:</span>{{enemies[1].attackPower}}</div>
+              <div><span>Defense: </span>{{enemies[1].defensePower}}</div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="enemies && hero">
+  <!-- <div *ngIf="hero"> -->
+    <div class="grid grid-pad" *ngIf="hero.healthPower <= 0 || (enemies[0].healthPower <= 0 && enemies[1].healthPower <= 0)">
+      <h3>{{message}}</h3>
+      <button (click)="goBack()">Leave</button>
+    </div>
+  <!-- </div> -->
+</div>
